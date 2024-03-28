@@ -152,18 +152,12 @@ class Chadwyck(BaseCorpus):
 
     ext_xml='.xml'
     ext_raw='.new'
-
+    
     # compile from raw
-    # This is your custom installation function
-    # compile from raw
-
     def compile(self,lim=None,db=True,**y):
-        # get 
-        # make sure I have it
         self.compile_download()
-        # walk
-        fnfns=[]
-        ids=[]
+
+    
         path_raw2 = os.path.join(self.path_raw,'raw')
         path_raw = self.path_raw if not os.path.exists(path_raw2) else path_raw2
 
@@ -189,7 +183,6 @@ class Chadwyck(BaseCorpus):
         res_lld=pmap(compile_text,objs[:lim],num_proc=DEFAULT_NUM_PROC,desc=f'[{self.name}] Compiling texts')
         res_ld = [d for ld in res_lld for d in ld]
         
-        if db: self.compile_db(res_ld)
                 
         # compile csv
         res_df=fix_meta(pd.DataFrame(res_ld))

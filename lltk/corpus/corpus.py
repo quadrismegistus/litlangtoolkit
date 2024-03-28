@@ -393,7 +393,7 @@ class BaseCorpus(TextList):
         # if _add: self.add_text(t)
         
         # add source?
-        if _source: t.add_source(_source)
+        # if _source: t.add_source(_source)
 
         # Return text
         if log>1: log(f'-> {t}' if is_text_obj(t) else "-> ?")
@@ -627,9 +627,9 @@ class BaseCorpus(TextList):
                 meta=just_meta_no_id(dx)
                 t = self.text(
                     id, 
-                    _source=None,
+                    _source = None,
                     _add = True,
-                    _cache=False,
+                    _cache = False,
                     _force = False,
                     _new = False,
                     _init = False,
@@ -1114,7 +1114,7 @@ class BaseCorpus(TextList):
 
 
 class SectionCorpus(BaseCorpus):
-    def init(self): pass ##@TODO ???
+    def init(self, *args, **kwargs): pass ##@TODO ???
 
     @property
     def source(self): return self._source

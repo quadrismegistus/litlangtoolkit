@@ -2083,7 +2083,7 @@ def zeropunc(s,allow={}):
     # # return ''.join(x for x in s if x.isalpha() or x in ok)
 
 
-def now(now=None):
+def nowstr(now=None):
     import datetime as dt
     if not now:
         now=dt.datetime.now()
