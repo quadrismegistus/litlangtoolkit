@@ -2,7 +2,7 @@ from lltk.imports import *
 from lltk.model.characters import CharacterSystem
 from lltk.model.charnet import *
 from lltk.corpus.corpus import SectionCorpus
-
+import bs4
 
 CLAR_ID=f'_chadwyck/Eighteenth-Century_Fiction/richards.01'
 CLAR_IDX=f'Eighteenth-Century_Fiction/richards.01'
@@ -225,6 +225,8 @@ class SectionCorpusLetterChadwyck(SectionCorpusLetter):
 
     def redo_xml(self):
         dom = self.dom
+        if dom is None: return bs4.BeautifulSoup()
+
         vols = dom(self.DIV_VOL)
         if not len(vols): vols=[dom]
         newxml = []   
@@ -257,7 +259,7 @@ class SectionCorpusLetterChadwyck(SectionCorpusLetter):
         super().init(force=force)
         if not force and self._init: return
         
-        if log>0: log(f'Initializing: {self.addr}')
+        log(f'Initializing: {self.addr}')
         from string import ascii_lowercase
         alpha=ascii_lowercase#.replace('x','')
         alpha = (alpha*1000)
@@ -281,7 +283,10 @@ class SectionCorpusLetterChadwyck(SectionCorpusLetter):
                 num_letters = len(ltrs)
                 # if not num_letters: continue
                 _xmldiv = clean_text(str(divdom))
-                _xmldiv_hdr = _xmldiv[:_xmldiv.index(f'<{self.LTR}')]
+                try:
+                    _xmldiv_hdr = _xmldiv[:_xmldiv.index(f'<{self.LTR}')]
+                except ValueError:
+                    continue
                 
                 letter_i+=1
                 letter_ii = 0 if num_letters<2 else 1

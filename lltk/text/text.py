@@ -943,6 +943,7 @@ class BaseText(BaseObject):
 
 
     def match(self,other,yn='',rel=MATCHRELNAME,rel_type='',cache=True,viceversa=True,**kwargs):
+        return
         self.cdb # make sure active
         if is_textish(other): 
             other = Text(other)
@@ -986,6 +987,7 @@ class BaseText(BaseObject):
 
     
     def get_matches(self,node=None,as_text=True,rel=MATCHRELNAME,depth=1,**kwargs):
+        return set()
         return set(self.get_matchgraph().nodes()) - {self.addr}
 
     def get_matchgraph(self,as_text=True,rel=MATCHRELNAME,depth=1,node_name='addr',**kwargs):
